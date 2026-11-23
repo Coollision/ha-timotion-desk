@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.2.1](https://github.com/Coollision/ha-timotion-desk/compare/v0.2.0...v0.2.1) (2026-11-23)
+
+
+### Bug Fixes
+
+* ask an idle desk for its height before starting a move ([29b38aa](https://github.com/Coollision/ha-timotion-desk/commit/29b38aa545efae43fa93dd95dec32b4f2bed312c))
+
 ## [0.2.0](https://github.com/Coollision/ha-timotion-desk/compare/v0.1.0...v0.2.0) (2026-11-23)
 
 
