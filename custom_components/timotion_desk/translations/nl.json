@@ -1,0 +1,118 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Kies een bureau",
+        "description": "Bureaus verschijnen als `stand UP-` gevolgd door vier cijfers. Sluit eerst de Stand Up Pls-app op je telefoon: het bureau accepteert maar één Bluetooth-verbinding.",
+        "data": {
+          "address": "Bureau"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Wil je {name} instellen?"
+      }
+    },
+    "abort": {
+      "no_devices_found": "Geen nieuwe bureaus gevonden. Controleer dat het bureau aanstaat, binnen bereik van een Bluetooth-adapter of proxy is en niet verbonden is met de telefoon-app.",
+      "already_configured": "Dit bureau is al ingesteld.",
+      "already_in_progress": "De installatie van dit bureau loopt al."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Bureau-opties",
+        "menu_options": {
+          "add_preset": "Preset toevoegen",
+          "edit_preset": "Preset wijzigen",
+          "remove_preset": "Presets verwijderen",
+          "settings": "Verbinding"
+        }
+      },
+      "add_preset": {
+        "title": "Preset toevoegen",
+        "description": "Een preset is een hoogte met een naam. Hij verschijnt in de keuzelijst Preset en rijdt het bureau naar die hoogte als je hem kiest.",
+        "data": {
+          "name": "Naam",
+          "height": "Hoogte"
+        }
+      },
+      "edit_preset": {
+        "title": "Preset wijzigen",
+        "data": {
+          "name": "Preset"
+        }
+      },
+      "edit_preset_details": {
+        "title": "Preset wijzigen",
+        "data": {
+          "name": "Naam",
+          "height": "Hoogte"
+        }
+      },
+      "remove_preset": {
+        "title": "Presets verwijderen",
+        "data": {
+          "remove": "Te verwijderen presets"
+        }
+      },
+      "settings": {
+        "title": "Verbinding",
+        "description": "Het bureau accepteert één Bluetooth-verbinding. Verbonden blijven geeft live hoogte, ook bij bewegingen met de handset, maar sluit de telefoon-app buiten. Uitgeschakeld verbindt Home Assistant alleen om een commando te sturen en laat na 30 seconden los.",
+        "data": {
+          "keep_connected": "Verbonden blijven"
+        }
+      }
+    },
+    "error": {
+      "name_empty": "Geef de preset een naam.",
+      "name_exists": "Er bestaat al een preset met deze naam."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "height": {
+        "name": "Hoogte"
+      },
+      "state": {
+        "name": "Status",
+        "state": {
+          "idle": "Stil",
+          "moving_up": "Omhoog",
+          "moving_down": "Omlaag",
+          "reset_mode": "Resetmodus"
+        }
+      }
+    },
+    "binary_sensor": {
+      "moving": {
+        "name": "Beweegt"
+      },
+      "collision": {
+        "name": "Botsing"
+      },
+      "connected": {
+        "name": "Verbonden"
+      }
+    },
+    "number": {
+      "target_height": {
+        "name": "Doelhoogte"
+      }
+    },
+    "select": {
+      "preset": {
+        "name": "Preset"
+      }
+    },
+    "button": {
+      "stop": {
+        "name": "Stop"
+      },
+      "reset": {
+        "name": "Hoogte resetten"
+      }
+    }
+  }
+}

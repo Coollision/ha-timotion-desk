@@ -1,0 +1,15 @@
+TiMotion Desk
+Copyright 2026 Youri Declerck
+
+Licensed under the Apache License, Version 2.0 (see LICENSE).
+
+This is an unofficial community project. It is not affiliated with, endorsed
+by, or sponsored by TiMOTION Technology Co., Ltd., Ergonice, Home Assistant,
+Nabu Casa, Inc. or the Open Home Foundation. "TiMOTION", "TWD1" and "Stand Up
+Pls" are names of their respective owners and are used only to describe
+compatibility.
+
+The Bluetooth protocol notes in docs/PROTOCOL.md come from observing the
+author's own desk and from reading the author's own installed copy of the phone
+app for interoperability. No code, images or other material of the phone app is
+included or redistributed.

@@ -1,0 +1,26 @@
+{
+  "domain": "timotion_desk",
+  "name": "TiMotion Desk",
+  "bluetooth": [
+    {
+      "connectable": true,
+      "local_name": "stand UP-*",
+      "service_uuid": "6e400001-b5a3-f393-e0a9-e50e24dcca9e"
+    }
+  ],
+  "codeowners": [
+    "@Coollision"
+  ],
+  "config_flow": true,
+  "dependencies": [
+    "bluetooth_adapters"
+  ],
+  "documentation": "https://github.com/Coollision/ha-timotion-desk",
+  "integration_type": "device",
+  "iot_class": "local_push",
+  "issue_tracker": "https://github.com/Coollision/ha-timotion-desk/issues",
+  "requirements": [
+    "bleak-retry-connector>=3.6.0"
+  ],
+  "version": "0.1.0"
+}

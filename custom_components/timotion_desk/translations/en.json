@@ -1,0 +1,118 @@
+{
+  "config": {
+    "flow_title": "{name}",
+    "step": {
+      "user": {
+        "title": "Choose a desk",
+        "description": "Desks show up as `stand UP-` followed by four digits. Close the Stand Up Pls phone app first: the desk accepts only one Bluetooth connection.",
+        "data": {
+          "address": "Desk"
+        }
+      },
+      "bluetooth_confirm": {
+        "description": "Do you want to set up {name}?"
+      }
+    },
+    "abort": {
+      "no_devices_found": "No new desks found. Make sure the desk is powered, in range of a Bluetooth adapter or proxy, and not connected to the phone app.",
+      "already_configured": "This desk is already set up.",
+      "already_in_progress": "Setup for this desk is already in progress."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Desk options",
+        "menu_options": {
+          "add_preset": "Add a preset",
+          "edit_preset": "Edit a preset",
+          "remove_preset": "Remove presets",
+          "settings": "Connection"
+        }
+      },
+      "add_preset": {
+        "title": "Add a preset",
+        "description": "A preset is a named height. It appears in the Preset dropdown and moves the desk there when picked.",
+        "data": {
+          "name": "Name",
+          "height": "Height"
+        }
+      },
+      "edit_preset": {
+        "title": "Edit a preset",
+        "data": {
+          "name": "Preset"
+        }
+      },
+      "edit_preset_details": {
+        "title": "Edit a preset",
+        "data": {
+          "name": "Name",
+          "height": "Height"
+        }
+      },
+      "remove_preset": {
+        "title": "Remove presets",
+        "data": {
+          "remove": "Presets to remove"
+        }
+      },
+      "settings": {
+        "title": "Connection",
+        "description": "The desk accepts a single Bluetooth connection. Keeping it open gives live height, including moves made with the handset, but locks the phone app out. When off, Home Assistant connects only to send a command and lets go after 30 seconds.",
+        "data": {
+          "keep_connected": "Keep connected"
+        }
+      }
+    },
+    "error": {
+      "name_empty": "Give the preset a name.",
+      "name_exists": "A preset with this name already exists."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "height": {
+        "name": "Height"
+      },
+      "state": {
+        "name": "State",
+        "state": {
+          "idle": "Idle",
+          "moving_up": "Moving up",
+          "moving_down": "Moving down",
+          "reset_mode": "Reset mode"
+        }
+      }
+    },
+    "binary_sensor": {
+      "moving": {
+        "name": "Moving"
+      },
+      "collision": {
+        "name": "Collision"
+      },
+      "connected": {
+        "name": "Connected"
+      }
+    },
+    "number": {
+      "target_height": {
+        "name": "Target height"
+      }
+    },
+    "select": {
+      "preset": {
+        "name": "Preset"
+      }
+    },
+    "button": {
+      "stop": {
+        "name": "Stop"
+      },
+      "reset": {
+        "name": "Reset height"
+      }
+    }
+  }
+}
