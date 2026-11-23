@@ -67,6 +67,7 @@ class TimotionDesk:
         self.status_time = 0.0
         self.connected = False
         self.unsupported_protocol = False  # the desk answered in "protocol 2"
+        self._closed = False  # set on unload: never reconnect after that
         self.target_cm: int | None = None  # set while a move is running
 
         self._client: BleakClient | None = None
@@ -119,6 +120,7 @@ class TimotionDesk:
 
     async def async_shutdown(self) -> None:
         """Stop everything: advertisement watch, running move, connection."""
+        self._closed = True
         if self._cancel_advert:
             self._cancel_advert()
             self._cancel_advert = None
@@ -137,7 +139,11 @@ class TimotionDesk:
 
     @callback
     def _schedule_connect(self) -> None:
-        if self._connect_lock.locked() or monotonic() - self._last_attempt < RECONNECT_MIN_SECONDS:
+        if (
+            self._closed
+            or self._connect_lock.locked()
+            or monotonic() - self._last_attempt < RECONNECT_MIN_SECONDS
+        ):
             return
         self._last_attempt = monotonic()
         self.entry.async_create_background_task(
@@ -152,6 +158,8 @@ class TimotionDesk:
 
     async def _async_connect(self) -> None:
         async with self._connect_lock:
+            if self._closed:
+                raise HomeAssistantError(f"{self.name} is being unloaded")
             if self._client is not None and self._client.is_connected:
                 return
             ble_device = bluetooth.async_ble_device_from_address(
@@ -186,6 +194,8 @@ class TimotionDesk:
     def _on_disconnected(self, client: BleakClient) -> None:
         self._client = None
         self.connected = False
+        if self._closed:
+            return
         self._dispatch()
         if self.keep_connected:
             self._schedule_connect()

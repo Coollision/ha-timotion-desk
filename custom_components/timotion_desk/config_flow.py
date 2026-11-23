@@ -27,7 +27,7 @@ from .const import (
     DEFAULT_KEEP_CONNECTED,
     DOMAIN,
 )
-from .protocol import DEVICE_NAME_PREFIX, HEIGHT_MAX_CM, HEIGHT_MIN_CM, SERVICE_UUID
+from .protocol import DEVICE_NAME_PREFIX, HEIGHT_MAX_CM, HEIGHT_MIN_CM
 
 _HEIGHT_SELECTOR = selector.NumberSelector(
     selector.NumberSelectorConfig(
@@ -41,7 +41,9 @@ _HEIGHT_SELECTOR = selector.NumberSelector(
 
 
 def _is_desk(info: BluetoothServiceInfoBleak) -> bool:
-    return SERVICE_UUID in info.service_uuids and (info.name or "").startswith(DEVICE_NAME_PREFIX)
+    # Name only: a passive scanner can miss the service UUID (it may sit in the
+    # scan response), but the local name is in the advertisement itself.
+    return (info.name or "").startswith(DEVICE_NAME_PREFIX)
 
 
 class TimotionDeskConfigFlow(ConfigFlow, domain=DOMAIN):
