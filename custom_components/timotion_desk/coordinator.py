@@ -305,10 +305,20 @@ class TimotionDesk:
                 raise HomeAssistantError(f"Move stopped: {abort}")
 
     async def _async_first_status(self) -> DeskStatus:
+        """A fresh status to start a move from.
+
+        An idle desk goes quiet: it only streams while moving or after a frame
+        from us. So if the last status is stale, ask for one (the stop frame is
+        the "tell me your height" request) and wait for the reply.
+        """
         deadline = monotonic() + FIRST_STATUS_TIMEOUT
+        requested = False
         while monotonic() < deadline:
             if self.status is not None and monotonic() - self.status_time < 1.0:
                 return self.status
+            if not requested:
+                requested = True
+                await self._async_write(STOP_FRAME)
             await asyncio.sleep(0.1)
         if self.unsupported_protocol:
             raise HomeAssistantError(
