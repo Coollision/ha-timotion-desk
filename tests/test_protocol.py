@@ -90,6 +90,15 @@ class StatusTests(unittest.TestCase):
         self.assertIsNone(status("9840016f49"))  # wrong head
         self.assertIsNone(status("9940016f4900"))  # wrong length
 
+    def test_protocol2_frames_are_recognised_but_not_decoded(self):
+        for length, kind in ((11, 0), (14, 1), (19, 2)):
+            frame = bytes([0x9D, kind]) + bytes(length - 2)
+            self.assertTrue(p.is_protocol2_frame(frame), length)
+            self.assertIsNone(p.parse_status(frame))
+        self.assertFalse(p.is_protocol2_frame(bytes.fromhex("9940016f49")))
+        self.assertFalse(p.is_protocol2_frame(b""))
+        self.assertFalse(p.is_protocol2_frame(bytes([0x9D, 3]) + bytes(9)))
+
     def test_equality_ignores_raw_bytes(self):
         a = p.DeskStatus(74, p.Direction.IDLE, False, False, b"a")
         b = p.DeskStatus(74, p.Direction.IDLE, False, False, b"b")

@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Choose a desk",
-        "description": "Desks show up as `stand UP-` followed by four digits. Close the Stand Up Pls phone app first: the desk accepts only one Bluetooth connection.",
+        "description": "Desks show up as `stand UP-` followed by four digits. Only desks whose TWD1 module speaks the original \"protocol 1\" are supported. Close the Stand Up Pls phone app first: the desk accepts only one Bluetooth connection.",
         "data": {
           "address": "Desk"
         }
@@ -14,7 +14,7 @@
       }
     },
     "abort": {
-      "no_devices_found": "No new desks found. Make sure the desk is powered, in range of a Bluetooth adapter or proxy, and not connected to the phone app.",
+      "no_devices_found": "No new desks found. Make sure the desk is powered, in range of a Bluetooth adapter or proxy, and not connected to the phone app. Only TiMotion TWD1 desks (\"stand UP-\") using protocol 1 are supported.",
       "already_configured": "This desk is already set up.",
       "already_in_progress": "Setup for this desk is already in progress."
     }

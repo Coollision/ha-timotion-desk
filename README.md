@@ -9,6 +9,12 @@ Control and follow a **sit-stand desk with a TiMotion TWD1 Bluetooth module** fr
 
 > **Status: early.** Built from a protocol reverse-engineered on one desk (TiMotion TC15S control box, TDH18P handset). The protocol layer and the movement safety logic have unit tests built from real captured frames and the commands were exercised on that desk; the Home Assistant layer is new. See [docs/PROTOCOL.md](docs/PROTOCOL.md) for exactly what is known and how.
 
+## Supported desks
+
+**Only desks whose TWD1 module speaks the original "protocol 1" are supported.** That is what a TWD1 on a TC15S-class control box does: 5 byte frames, height and direction only (see [docs/PROTOCOL.md](docs/PROTOCOL.md)). Newer modules that speak "protocol 2" (11/14/19 byte frames starting `9D`) also advertise as `stand UP- NNNN` and will be *discovered*, but cannot be controlled yet. If that is your desk, the log says so (`speaks the newer TWD1 'protocol 2'`) and moves fail with the same message. Reading its limits and memory slots would be possible with a capture from such a desk, see the PROTOCOL notes, and pull requests are welcome.
+
+Not supported: other desk brands' Bluetooth modules (Linak, IKEA Idåsen, Jiecang, Desky, …). Home Assistant has or can load separate integrations for those.
+
 ## Features
 
 - **Sensors**: *Height* (cm) and *State* (idle, moving up, moving down, reset mode).
@@ -34,7 +40,7 @@ They show up in the *Preset* dropdown immediately. The handset's own memory slot
 |---|---|
 | Home Assistant | 2026.10 or newer |
 | Bluetooth | A Bluetooth adapter or ESPHome Bluetooth proxy in range of the desk (a connectable one) |
-| Desk | A TiMotion **TWD1** module (advertises `stand UP- NNNN`) |
+| Desk | A TiMotion **TWD1** module speaking *protocol 1* (advertises `stand UP- NNNN`), see [Supported desks](#supported-desks) |
 
 ## Installation
 

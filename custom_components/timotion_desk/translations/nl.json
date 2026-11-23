@@ -4,7 +4,7 @@
     "step": {
       "user": {
         "title": "Kies een bureau",
-        "description": "Bureaus verschijnen als `stand UP-` gevolgd door vier cijfers. Sluit eerst de Stand Up Pls-app op je telefoon: het bureau accepteert maar één Bluetooth-verbinding.",
+        "description": "Bureaus verschijnen als `stand UP-` gevolgd door vier cijfers. Alleen bureaus waarvan de TWD1-module het oorspronkelijke \"protocol 1\" spreekt worden ondersteund. Sluit eerst de Stand Up Pls-app op je telefoon: het bureau accepteert maar één Bluetooth-verbinding.",
         "data": {
           "address": "Bureau"
         }
@@ -14,7 +14,7 @@
       }
     },
     "abort": {
-      "no_devices_found": "Geen nieuwe bureaus gevonden. Controleer dat het bureau aanstaat, binnen bereik van een Bluetooth-adapter of proxy is en niet verbonden is met de telefoon-app.",
+      "no_devices_found": "Geen nieuwe bureaus gevonden. Controleer dat het bureau aanstaat, binnen bereik van een Bluetooth-adapter of proxy is en niet verbonden is met de telefoon-app. Alleen TiMotion TWD1-bureaus (\"stand UP-\") met protocol 1 worden ondersteund.",
       "already_configured": "Dit bureau is al ingesteld.",
       "already_in_progress": "De installatie van dit bureau loopt al."
     }

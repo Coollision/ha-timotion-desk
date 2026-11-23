@@ -35,6 +35,7 @@ from .protocol import (
     STOP_FRAME,
     WRITE_CHAR_UUID,
     DeskStatus,
+    is_protocol2_frame,
     move_to_frame,
     parse_status,
     valid_height,
@@ -65,6 +66,7 @@ class TimotionDesk:
         self.status: DeskStatus | None = None
         self.status_time = 0.0
         self.connected = False
+        self.unsupported_protocol = False  # the desk answered in "protocol 2"
         self.target_cm: int | None = None  # set while a move is running
 
         self._client: BleakClient | None = None
@@ -199,8 +201,16 @@ class TimotionDesk:
 
     @callback
     def _on_notify(self, _char: object, data: bytearray) -> None:
-        status = parse_status(bytes(data))
+        frame = bytes(data)
+        status = parse_status(frame)
         if status is None:
+            if is_protocol2_frame(frame) and not self.unsupported_protocol:
+                self.unsupported_protocol = True
+                _LOGGER.warning(
+                    "%s speaks the newer TWD1 'protocol 2', which this integration "
+                    "does not support (only 'protocol 1' desks work)",
+                    self.name,
+                )
             return
         changed = status != self.status
         self.status = status
@@ -290,6 +300,11 @@ class TimotionDesk:
             if self.status is not None and monotonic() - self.status_time < 1.0:
                 return self.status
             await asyncio.sleep(0.1)
+        if self.unsupported_protocol:
+            raise HomeAssistantError(
+                "This desk speaks the newer TWD1 'protocol 2', which this integration "
+                "does not support (only 'protocol 1' desks work)"
+            )
         raise HomeAssistantError("The desk is connected but not reporting its height")
 
     async def _async_send_stop(self) -> None:

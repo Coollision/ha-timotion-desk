@@ -129,8 +129,9 @@ on a real desk): frames start with `9D`, are 11 / 14 / 19 bytes long (byte 1 =
 `00` settings, `01` status 1, `02` status 2) and carry product id, minimum and
 maximum height, battery, motor and T-Touch flags, error codes, **limits and the
 four memory heights**. It is requested with `DD 01 00 00 00 00 00 00` and uses a
-7-bit checksum over bytes 2…n-2. A desk that speaks it would let this integration
-read its slots; PRs with captures are welcome.
+7-bit checksum over bytes 2…n-2. **The integration does not support these desks**: it only decodes
+protocol 1, detects protocol-2 frames and says so in the log. A desk that speaks
+it would let a future version read its slots; PRs with captures are welcome.
 
 ## Handset serial line (not Bluetooth)
 

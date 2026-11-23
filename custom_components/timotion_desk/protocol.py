@@ -33,6 +33,7 @@ CHECKSUM_MASK = 0x7F
 
 _TX_HEAD = (0xD9, 0xFF)
 _RX_HEAD = 0x99
+_PROTOCOL2_HEAD = 0x9D
 
 CMD_STOP = 0x00
 CMD_UP = 0x01
@@ -132,6 +133,14 @@ def parse_status(data: bytes) -> DeskStatus | None:
         reset_mode=False,
         raw=data,
     )
+
+
+def is_protocol2_frame(data: bytes) -> bool:
+    """Whether a frame belongs to the newer "protocol 2" (not supported here).
+
+    Those modules send 11, 14 or 19 byte frames starting with 0x9D.
+    """
+    return len(data) in (11, 14, 19) and data[0] == _PROTOCOL2_HEAD and data[1] in (0, 1, 2)
 
 
 def _direction(status: int) -> Direction:
